@@ -1,0 +1,591 @@
+/* ================================================================
+   MINECRAFT JAVA EDITION — Title Screen (Loading Screen)
+   Exact recreation of the Java Edition 1.21 title/loading screen
+   ================================================================ */
+
+/* ── Wrapper ─────────────────────────────────────────────────── */
+.ls {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.ls.ls--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ================================================================
+   PANORAMA BACKGROUND
+   Simulates the rotating world view Java Edition uses
+   ================================================================ */
+.ls__panorama {
+    position: absolute;
+    inset: -5%;
+    background: url('/mc-panorama.jpg') center center / cover no-repeat;
+    animation: panoramaPan 60s linear infinite;
+}
+
+/* Cloud layer */
+.ls__panorama::before {
+    content: '';
+    position: absolute;
+    top: 8%;
+    left: 0;
+    right: 0;
+    height: 18%;
+    background:
+        radial-gradient(ellipse 120px 18px at 15% 50%, rgba(255, 255, 255, 0.85) 0%, transparent 70%),
+        radial-gradient(ellipse 90px 14px at 38% 55%, rgba(255, 255, 255, 0.75) 0%, transparent 70%),
+        radial-gradient(ellipse 140px 20px at 62% 48%, rgba(255, 255, 255, 0.8) 0%, transparent 70%),
+        radial-gradient(ellipse 80px 12px at 82% 52%, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
+    animation: cloudDrift 40s linear infinite;
+}
+
+/* Block texture layer — simulates the world grid */
+.ls__panorama::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.04) 0px, rgba(0, 0, 0, 0.04) 1px,
+            transparent 1px, transparent 16px),
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.04) 0px, rgba(0, 0, 0, 0.04) 1px,
+            transparent 1px, transparent 16px);
+    pointer-events: none;
+}
+
+@keyframes panoramaPan {
+    0% {
+        transform: scale(1.08) translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.08) translateX(-2%) rotate(0.3deg);
+    }
+
+    50% {
+        transform: scale(1.08) translateX(0) rotate(0deg);
+    }
+
+    75% {
+        transform: scale(1.08) translateX(2%) rotate(-0.3deg);
+    }
+
+    100% {
+        transform: scale(1.08) translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes cloudDrift {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-8%);
+    }
+}
+
+/* Dark vignette over panorama — Java Edition always darkens edges */
+.ls__vignette {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 100% 100% at 50% 50%,
+            rgba(0, 0, 0, 0) 30%,
+            rgba(0, 0, 0, 0.35) 70%,
+            rgba(0, 0, 0, 0.6) 100%),
+        /* Darker at top and bottom like Java Edition */
+        linear-gradient(180deg,
+            rgba(0, 0, 0, 0.35) 0%,
+            rgba(0, 0, 0, 0) 20%,
+            rgba(0, 0, 0, 0) 70%,
+            rgba(0, 0, 0, 0.45) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ================================================================
+   CONTENT LAYER
+   ================================================================ */
+.ls__ui {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ================================================================
+   MINECRAFT LOGO — matches Java Edition title screen exactly
+   ================================================================ */
+.ls__logo-wrap {
+    margin-top: clamp(28px, 8vh, 72px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Push splash text relative to this */
+}
+
+/* The pixel-chunky main title wordmark */
+.ls__logo-mc {
+    font-family: var(--mc-font-logo);
+    font-size: clamp(28px, 7vw, 72px);
+    line-height: 1;
+    letter-spacing: 2px;
+    /* Java Edition logo: warm white → grey gradient */
+    background: linear-gradient(180deg,
+            #ffffff 0%,
+            #f5f5f5 30%,
+            #c8c8c8 65%,
+            #888888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Chunky multi-layer drop shadow */
+    filter:
+        drop-shadow(3px 3px 0 #3f3f3f) drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.5)) drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.6));
+    animation: logoFloat 4s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+/* "JAVA EDITION" — smaller, golden italic, slightly below */
+.ls__logo-edition {
+    font-family: var(--mc-font-logo);
+    font-size: clamp(11px, 2.2vw, 24px);
+    color: #f0ba00;
+    text-shadow:
+        1px 1px 0 #4a3800,
+        2px 2px 0 rgba(0, 0, 0, 0.5);
+    letter-spacing: 3px;
+    margin-top: -4px;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ── SPLASH TEXT — the yellow rotated tip ──────────────────────── */
+.ls__splash {
+    font-family: var(--mc-font-ui);
+    font-size: clamp(0.9rem, 2.4vw, 1.5rem);
+    color: #ffff55;
+    text-shadow: 2px 2px 0 #3f3f00, 1px 1px 0 #3f3f00;
+    font-style: italic;
+    transform-origin: center;
+    display: inline-block;
+    animation: splashWobble 0.85s ease-in-out infinite alternate;
+    position: absolute;
+    /* Position top-right of the logo, rotated — exactly like Java Edition */
+    top: 8px;
+    right: -8px;
+    white-space: nowrap;
+    max-width: 240px;
+    text-align: center;
+    line-height: 1.2;
+    z-index: 3;
+}
+
+@keyframes splashWobble {
+    from {
+        transform: rotate(-8deg) scale(0.92);
+    }
+
+    to {
+        transform: rotate(-5deg) scale(1.06);
+    }
+}
+
+/* ================================================================
+   LOADING PHASE — progress bar area
+   ================================================================ */
+.ls__loading-area {
+    margin-top: auto;
+    margin-bottom: clamp(60px, 10vh, 120px);
+    width: clamp(260px, 50vw, 480px);
+    text-align: center;
+}
+
+.ls__loading-tip {
+    font-family: var(--mc-font-ui);
+    font-size: 1.2rem;
+    color: var(--mc-7);
+    text-shadow: 1px 1px 0 #000;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    min-height: 1.4rem;
+}
+
+/* Java Edition loading bar — slim, at bottom of screen */
+.ls__bar-track {
+    width: 100%;
+    height: 20px;
+    background: #000;
+    box-shadow:
+        0 0 0 2px #1a1a1a,
+        inset 0 0 0 2px #3a3a3a;
+    position: relative;
+    overflow: hidden;
+}
+
+.ls__bar-fill {
+    height: 100%;
+    background: linear-gradient(180deg,
+            #80c020 0%,
+            #57861e 60%,
+            #3d6016 100%);
+    box-shadow: inset 0 3px 0 0 rgba(255, 255, 255, 0.28);
+    transition: width 0.12s ease-out;
+    position: relative;
+}
+
+/* Stripe animation on bar */
+.ls__bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 12px,
+            rgba(0, 0, 0, 0.12) 12px, rgba(0, 0, 0, 0.12) 16px);
+    animation: barStripe 0.4s linear infinite;
+}
+
+@keyframes barStripe {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(16px);
+    }
+}
+
+.ls__bar-pct {
+    font-family: var(--mc-font-ui);
+    font-size: 0.95rem;
+    color: #666;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* ================================================================
+   TITLE SCREEN PHASE — Java Edition main menu layout
+   ================================================================ */
+.ls__title-ui {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(20px, 4vh, 48px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* The menu button column — exactly like Java Edition center column */
+.ls__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: clamp(240px, 50vw, 400px);
+}
+
+/* Big "Enter the World" — styled as Singleplayer button */
+.ls__menu-btn {
+    font-family: var(--mc-font-ui);
+    font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+    letter-spacing: 1px;
+    line-height: 1;
+    text-align: center;
+    color: #e0e0e0;
+    text-shadow: 1px 1px 0 #3f3f3f, 2px 2px 0 #3f3f3f;
+    background: #555555;
+    border: none;
+    cursor: pointer;
+    padding: 12px 16px;
+    width: 100%;
+    position: relative;
+    transition: background-color 0.05s, color 0.05s;
+    user-select: none;
+    /* Exact Java Edition 3-layer border */
+    box-shadow:
+        0 0 0 2px #1a1a1a,
+        inset 0 0 0 2px #7d7d7d,
+        inset -2px -3px 0 0 #1a1a1a;
+}
+
+.ls__menu-btn:hover,
+.ls__menu-btn:focus {
+    background: #6464b4;
+    color: #ffffa0;
+    text-shadow: 1px 1px 0 #3f3f00, 2px 2px 0 #3f3f00;
+    box-shadow:
+        0 0 0 2px #1a1a1a,
+        inset 0 0 0 2px #8080d4,
+        inset -2px -3px 0 0 #1a1a1a;
+}
+
+.ls__menu-btn:active {
+    background: #444;
+    transform: translateY(1px);
+    box-shadow:
+        0 0 0 2px #1a1a1a,
+        inset 0 0 0 2px #555,
+        inset -2px -2px 0 0 #1a1a1a;
+}
+
+/* Small half-width buttons row (like Options / Quit Game) */
+.ls__menu-row {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    margin-top: 2px;
+}
+
+.ls__menu-row .ls__menu-btn {
+    flex: 1;
+    font-size: clamp(0.9rem, 2vw, 1.25rem);
+    padding: 10px 8px;
+}
+
+/* ================================================================
+   BOTTOM HUD — Java Edition corners
+   ================================================================ */
+.ls__bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 8px 12px;
+    pointer-events: none;
+}
+
+.ls__version {
+    font-family: var(--mc-font-ui);
+    font-size: 1rem;
+    color: #cccccc;
+    text-shadow: 1px 1px 0 #000;
+    letter-spacing: 0.5px;
+    pointer-events: all;
+}
+
+.ls__copyright {
+    font-family: var(--mc-font-ui);
+    font-size: 0.95rem;
+    color: #cccccc;
+    text-shadow: 1px 1px 0 #000;
+    letter-spacing: 0.5px;
+    text-align: right;
+}
+
+/* ================================================================
+   PLAYER HEAD — CSS pixel-art, bottom-right corner
+   Replaces Creeper — same position / bobbing anim
+   ================================================================ */
+.ls__player-deco {
+    position: absolute;
+    bottom: clamp(60px, 12vh, 120px);
+    right: clamp(20px, 5vw, 80px);
+    z-index: 2;
+    animation: creepDeco 2.4s ease-in-out infinite;
+    opacity: 0.92;
+}
+
+@keyframes creepDeco {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* ── Head block ──────────────────────────────────────────────── */
+.player__head {
+    width: 64px;
+    height: 64px;
+    /* Steve skin tone — warm tan */
+    background: #c8926c;
+    position: relative;
+    /* Pixel bevel: lighter top-left, darker bottom-right */
+    box-shadow:
+        inset 4px 4px 0 0 #dba882,
+        inset -4px -4px 0 0 #9e6b46,
+        0 0 0 3px #1a1a1a;
+    margin: 0 auto;
+}
+
+/* ── Hair / helmet layer (darker brown on top half) ─────────── */
+.player__hair {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    /* Dark brown hair */
+    background: #5c3d1e;
+    box-shadow:
+        inset 3px 3px 0 0 #7a5530,
+        inset -3px -3px 0 0 #3a2210;
+}
+
+/* ── Eyes ────────────────────────────────────────────────────── */
+.player__eyes {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 8px;
+}
+
+.player__eye {
+    width: 14px;
+    height: 10px;
+    /* White sclera */
+    background: #ffffff;
+    position: relative;
+    box-shadow: 0 0 0 1px #333;
+}
+
+/* Pupil — dark box inside each eye */
+.player__eye::after {
+    content: '';
+    position: absolute;
+    /* Pupils slightly toward center for natural look */
+    width: 6px;
+    height: 6px;
+    background: #1a6dc4;
+    /* Steve blue eyes */
+    top: 2px;
+}
+
+.player__eye--left::after {
+    right: 2px;
+}
+
+.player__eye--right::after {
+    left: 2px;
+}
+
+/* ── Nose ────────────────────────────────────────────────────── */
+.player__nose {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+    background: #b07850;
+}
+
+/* ── Mouth ───────────────────────────────────────────────────── */
+.player__mouth {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 6px;
+    /* Simple straight pixel mouth */
+    background: #8b5533;
+    box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+
+/* ── Tablet (≤768px) ── */
+@media (max-width: 768px) {
+    .ls__splash {
+        display: none;
+    }
+
+    .ls__menu {
+        width: min(90vw, 380px);
+    }
+
+    .ls__menu .mc-btn {
+        min-height: 44px;
+        font-size: 1.2rem;
+    }
+}
+
+/* ── Mobile (≤480px) ── */
+@media (max-width: 480px) {
+    .ls__player-deco {
+        display: none;
+    }
+
+    .ls__menu {
+        width: 92vw;
+        gap: 8px;
+    }
+
+    .ls__menu .mc-btn {
+        min-height: 48px;
+        font-size: 1.1rem;
+        padding: 12px 16px;
+    }
+
+    .ls__bottom {
+        padding: 0 12px 12px;
+    }
+
+    .ls__progress-wrap {
+        width: 92vw;
+    }
+}
+
+/* ── Small phone (≤320px) ── */
+@media (max-width: 320px) {
+    .ls__menu {
+        width: 96vw;
+        gap: 6px;
+    }
+
+    .ls__menu .mc-btn {
+        font-size: 1rem;
+        min-height: 44px;
+    }
+}

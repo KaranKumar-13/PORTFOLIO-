@@ -1,0 +1,277 @@
+/* ================================================================
+   MINECRAFT JAVA EDITION — Block Texture CSS Patterns
+   CSS recreation of common Minecraft block textures.
+   These use layered gradients + background-image to simulate
+   the pixel-art look of the actual block texture PNGs.
+   ================================================================ */
+
+/* ── GRASS BLOCK ─────────────────────────────────────────────── */
+.mc-tex-grass {
+    background-color: #7cbd6b;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0px, rgba(0, 0, 0, 0.06) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 4px);
+}
+
+/* Grass side — brown-green two-tone */
+.mc-tex-grass-side {
+    background: linear-gradient(to bottom,
+            #7cbd6b 0%, #7cbd6b 20%,
+            #966c4a 20%, #966c4a 100%);
+    background-image:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.07) 0px, rgba(0, 0, 0, 0.07) 1px, transparent 1px, transparent 4px);
+}
+
+/* ── DIRT ────────────────────────────────────────────────────── */
+.mc-tex-dirt {
+    background-color: #966c4a;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 8px),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0px, rgba(255, 255, 255, 0.06) 2px, transparent 2px, transparent 10px);
+}
+
+/* ── STONE ───────────────────────────────────────────────────── */
+.mc-tex-stone {
+    background-color: #888888;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 12px),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 8px),
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0px, rgba(0, 0, 0, 0.04) 1px, transparent 1px, transparent 8px);
+}
+
+/* ── COBBLESTONE ─────────────────────────────────────────────── */
+.mc-tex-cobble {
+    background-color: #737373;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 3px, transparent 3px, transparent 8px),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0px, rgba(255, 255, 255, 0.08) 3px, transparent 3px, transparent 8px),
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 1px, transparent 1px, transparent 12px);
+}
+
+/* ── OAK PLANKS ──────────────────────────────────────────────── */
+.mc-tex-planks {
+    background-color: #c09a5c;
+    background-image:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.12) 0px, rgba(0, 0, 0, 0.12) 1px,
+            transparent 1px, transparent 8px,
+            rgba(0, 0, 0, 0.08) 8px, rgba(0, 0, 0, 0.08) 9px,
+            transparent 9px, transparent 16px),
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.06) 0px, rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px, transparent 8px);
+}
+
+/* ── OAK LOG SIDE ────────────────────────────────────────────── */
+.mc-tex-log {
+    background-color: #7e6230;
+    background-image:
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px, transparent 4px),
+        repeating-linear-gradient(0deg,
+            rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px, transparent 8px);
+}
+
+/* ── SAND ────────────────────────────────────────────────────── */
+.mc-tex-sand {
+    background-color: #d9c990;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 2px,
+            transparent 2px, transparent 6px),
+        repeating-linear-gradient(135deg,
+            rgba(0, 0, 0, 0.04) 0px, rgba(0, 0, 0, 0.04) 1px,
+            transparent 1px, transparent 4px);
+}
+
+/* ── GRAVEL ──────────────────────────────────────────────────── */
+.mc-tex-gravel {
+    background-color: #8b8580;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(0, 0, 0, 0.12) 0px, rgba(0, 0, 0, 0.12) 3px,
+            transparent 3px, transparent 7px),
+        repeating-linear-gradient(-45deg,
+            rgba(255, 255, 255, 0.08) 0px, rgba(255, 255, 255, 0.08) 2px,
+            transparent 2px, transparent 6px);
+}
+
+/* ── OBSIDIAN ────────────────────────────────────────────────── */
+.mc-tex-obsidian {
+    background-color: #1a0e26;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(100, 50, 200, 0.08) 0px, rgba(100, 50, 200, 0.08) 3px,
+            transparent 3px, transparent 10px),
+        repeating-linear-gradient(135deg,
+            rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 2px,
+            transparent 2px, transparent 12px);
+}
+
+/* ── BEDROCK ─────────────────────────────────────────────────── */
+.mc-tex-bedrock {
+    background-color: #555555;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0.2) 4px,
+            transparent 4px, transparent 10px),
+        repeating-linear-gradient(-45deg,
+            rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 3px,
+            transparent 3px, transparent 8px);
+}
+
+/* ── ORE BLOCKS ──────────────────────────────────────────────── */
+/* Diamond ore */
+.mc-tex-diamond-ore {
+    background-color: #888;
+    background-image:
+        radial-gradient(circle at 20% 30%, #5fbdd8 0%, #5fbdd8 6px, transparent 6px),
+        radial-gradient(circle at 70% 60%, #5fbdd8 0%, #5fbdd8 4px, transparent 4px),
+        radial-gradient(circle at 50% 15%, #5fbdd8 0%, #5fbdd8 5px, transparent 5px),
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 2px, transparent 2px, transparent 10px);
+}
+
+/* Gold ore */
+.mc-tex-gold-ore {
+    background-color: #888;
+    background-image:
+        radial-gradient(circle at 25% 70%, #f8d000 0%, #f8d000 6px, transparent 6px),
+        radial-gradient(circle at 75% 25%, #f8d000 0%, #f8d000 4px, transparent 4px),
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 2px, transparent 2px, transparent 10px);
+}
+
+/* Emerald ore */
+.mc-tex-emerald-ore {
+    background-color: #888;
+    background-image:
+        radial-gradient(circle at 30% 50%, #2ecc71 0%, #2ecc71 5px, transparent 5px),
+        radial-gradient(circle at 65% 30%, #2ecc71 0%, #2ecc71 4px, transparent 4px),
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 2px, transparent 2px, transparent 10px);
+}
+
+/* ── NETHERRACK ──────────────────────────────────────────────── */
+.mc-tex-netherrack {
+    background-color: #7a2222;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(200, 0, 0, 0.1) 0px, rgba(200, 0, 0, 0.1) 3px,
+            transparent 3px, transparent 8px),
+        repeating-linear-gradient(135deg,
+            rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 2px,
+            transparent 2px, transparent 6px);
+}
+
+/* ── GLOWSTONE ───────────────────────────────────────────────── */
+.mc-tex-glowstone {
+    background-color: #f0b040;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(255, 200, 80, 0.25) 0px, rgba(255, 200, 80, 0.25) 4px,
+            transparent 4px, transparent 10px),
+        repeating-linear-gradient(135deg,
+            rgba(200, 100, 0, 0.15) 0px, rgba(200, 100, 0, 0.15) 2px,
+            transparent 2px, transparent 8px);
+    box-shadow: 0 0 16px 4px rgba(240, 180, 64, 0.35);
+}
+
+/* ── LEAVES ──────────────────────────────────────────────────── */
+.mc-tex-leaves {
+    background-color: #5f9e4c;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(0, 0, 0, 0.12) 0px, rgba(0, 0, 0, 0.12) 2px,
+            transparent 2px, transparent 5px),
+        repeating-linear-gradient(-45deg,
+            rgba(100, 200, 50, 0.12) 0px, rgba(100, 200, 50, 0.12) 2px,
+            transparent 2px, transparent 4px);
+}
+
+/* ── SOUL SAND ───────────────────────────────────────────────── */
+.mc-tex-soulsand {
+    background-color: #5d4a35;
+    background-image:
+        radial-gradient(circle at 25% 35%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 8px, transparent 8px),
+        radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 6px, transparent 6px),
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.06) 0px, rgba(0, 0, 0, 0.06) 2px, transparent 2px, transparent 8px);
+}
+
+/* ================================================================
+   JAVA EDITION GUI TEXTURES
+   ================================================================ */
+
+/* ── Dirt background (like the loading screen / options bg) ─── */
+.mc-gui-dirt-bg {
+    background-color: #3f3020;
+    background-image:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.35) 0px, rgba(0, 0, 0, 0.35) 1px,
+            transparent 1px, transparent 4px),
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.25) 0px, rgba(0, 0, 0, 0.25) 1px,
+            transparent 1px, transparent 4px),
+        repeating-linear-gradient(45deg,
+            rgba(80, 50, 20, 0.4) 0px, rgba(80, 50, 20, 0.4) 3px,
+            transparent 3px, transparent 8px),
+        repeating-linear-gradient(135deg,
+            rgba(60, 30, 10, 0.3) 0px, rgba(60, 30, 10, 0.3) 2px,
+            transparent 2px, transparent 6px);
+}
+
+/* ── Stone slab background (options/pause screen) ────────────── */
+.mc-gui-stone-bg {
+    background-color: #6e6e6e;
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px,
+            transparent 2px, transparent 10px),
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.06) 0px, rgba(0, 0, 0, 0.06) 1px,
+            transparent 1px, transparent 6px);
+}
+
+/* ── Oak planks panel ────────────────────────────────────────── */
+.mc-gui-planks-bg {
+    background-color: #b8894a;
+    background-image:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px, transparent 8px,
+            rgba(0, 0, 0, 0.1) 8px, rgba(0, 0, 0, 0.1) 9px,
+            transparent 9px, transparent 16px);
+}
+
+/* ── Inventory / crafting table panel ────────────────────────── */
+.mc-gui-inventory {
+    background: #c6c6c6;
+    box-shadow:
+        inset 2px 2px 0 0 #fff,
+        inset -2px -2px 0 0 #555,
+        0 0 0 2px #1a1a1a;
+}
+
+/* Inventory slot (the recessed square) */
+.mc-slot {
+    background: #8b8b8b;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        inset 2px 2px 0 0 #373737,
+        inset -2px -2px 0 0 #fff;
+}
+
+.mc-slot:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Panorama blur overlay (used on loading/title screens) ────── */
+.mc-panorama-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.48);
+    pointer-events: none;
+}

@@ -1,0 +1,8 @@
+/* ── Import Minecraft Java Edition design system ── */
+@import './styles/mc-java-theme.css';
+@import './styles/mc-textures.css';
+
+/* ── App root ── */
+#root {
+  min-height: 100vh;
+}

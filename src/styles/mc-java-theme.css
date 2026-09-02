@@ -1,0 +1,509 @@
+/* ================================================================
+   MINECRAFT JAVA EDITION — Design System
+   Accurate recreation of Java Edition 1.21 UI
+   ================================================================ */
+
+/* ── Minecraft Bitmap Font ──────────────────────────────────────
+   The real Java Edition uses a proprietary bitmap font.
+   We use the web-ported "Minecraft" font by Craftron Gaming.
+   Press Start 2P is the closest widely-available alternative.
+   VT323 is used for body/smaller text (more readable).
+   ─────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/* ── Java Edition Color Palette ─────────────────────────────── */
+:root {
+    /* --- Core greys (UI panels, buttons) --- */
+    --mc-btn-face: #555555;
+    /* button face (rest state) */
+    --mc-btn-face-hover: #6464b4;
+    /* button face (hover) — subtle blue tint */
+    --mc-btn-edge-lt: #7d7d7d;
+    /* top-left lighter edge */
+    --mc-btn-edge-dk: #1a1a1a;
+    /* bottom-right darker edge */
+    --mc-btn-text: #e0e0e0;
+    /* button label white */
+    --mc-btn-text-shadow: #3f3f3f;
+    /* button text drop shadow */
+    --mc-btn-text-hover: #ffffa0;
+    /* button label on hover (golden) */
+
+    /* --- Background / world colours --- */
+    --mc-sky-day: #87ceeb;
+    /* daytime sky tint */
+    --mc-sky-night: #0a0f1e;
+    /* night sky */
+    --mc-overlay: rgba(0, 0, 0, 0.48);
+    /* darkening overlay on panorama */
+
+    /* --- Grass / dirt / stone palette --- */
+    --mc-grass: #5d9424;
+    --mc-grass-lt: #7abf36;
+    --mc-dirt: #8b5e3c;
+    --mc-dirt-lt: #a57148;
+    --mc-dirt-dk: #6b4424;
+    --mc-stone: #7a7a7a;
+    --mc-stone-lt: #9d9d9d;
+    --mc-stone-dk: #4a4a4a;
+    --mc-cobble: #6a6a6a;
+    --mc-gravel: #7b7265;
+
+    /* --- Special item colours --- */
+    --mc-gold: #ffaa00;
+    --mc-diamond: #4adcff;
+    --mc-emerald: #17dd62;
+    --mc-redstone: #e03b39;
+    --mc-lapis: #4455bb;
+    --mc-netherite: #444444;
+
+    /* --- Text colours --- */
+    --mc-text-white: #ffffff;
+    --mc-text-grey: #aaaaaa;
+    --mc-text-dark: #3f3f3f;
+    --mc-splash: #ffff55;
+    /* Java Edition splash text - always this yellow */
+    --mc-link: #5555ff;
+
+    /* --- Colour codes (§ codes from Java Edition) --- */
+    --mc-0: #000000;
+    /* §0 black */
+    --mc-1: #0000aa;
+    /* §1 dark blue */
+    --mc-2: #00aa00;
+    /* §2 dark green */
+    --mc-3: #00aaaa;
+    /* §3 dark aqua */
+    --mc-4: #aa0000;
+    /* §4 dark red */
+    --mc-5: #aa00aa;
+    /* §5 dark purple */
+    --mc-6: #ffaa00;
+    /* §6 gold */
+    --mc-7: #aaaaaa;
+    /* §7 gray */
+    --mc-8: #555555;
+    /* §8 dark gray */
+    --mc-9: #5555ff;
+    /* §9 blue */
+    --mc-a: #55ff55;
+    /* §a green */
+    --mc-b: #55ffff;
+    /* §b aqua */
+    --mc-c: #ff5555;
+    /* §c red */
+    --mc-d: #ff55ff;
+    /* §d light purple */
+    --mc-e: #ffff55;
+    /* §e yellow */
+    --mc-f: #ffffff;
+    /* §f white */
+
+    /* --- UI Panels --- */
+    --mc-panel-bg: rgba(0, 0, 0, 0.5);
+    --mc-panel-outer: #1a1a1a;
+    /* outermost border (2px) */
+    --mc-panel-lt: rgba(255, 255, 255, 0.18);
+    /* top-left inner highlight */
+    --mc-panel-dk: rgba(0, 0, 0, 0.6);
+    /* bottom-right inner shadow */
+
+    /* --- Dirt panel border (inventory, crafting) --- */
+    --mc-inv-bg: #c6c6c6;
+    /* light grey inventory bg */
+    --mc-inv-slot: #8b8b8b;
+    --mc-inv-border-lt: #ffffff;
+    --mc-inv-border-dk: #373737;
+
+    /* --- Font stack --- */
+    --mc-font-logo: 'Press Start 2P', 'Courier New', monospace;
+    /* headings */
+    --mc-font-ui: 'VT323', 'Courier New', monospace;
+    /* all UI text */
+
+    /* --- Spacing & sizing --- */
+    --mc-border-w: 2px;
+    --mc-border-outer: 4px;
+    --mc-radius: 0;
+    /* Minecraft has no border radius - always 0 */
+}
+
+/* ================================================================
+   GLOBAL RESETS & BASE
+   ================================================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: var(--mc-radius);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+}
+
+body {
+    background: #000;
+    color: var(--mc-text-white);
+    font-family: var(--mc-font-ui);
+    overflow-x: hidden;
+    line-height: 1;
+}
+
+/* Remove default focus outline — we'll do our own */
+:focus {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--mc-diamond);
+}
+
+/* Scrollbar — Minecraft style */
+::-webkit-scrollbar {
+    width: 6px;
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border: 1px solid #222;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ================================================================
+   JAVA EDITION BUTTON
+   Exact recreation of Java Edition 1.21 main-menu button
+   ================================================================ */
+.mc-btn {
+    display: block;
+    width: 100%;
+    font-family: var(--mc-font-ui);
+    font-size: 1.35rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-align: center;
+    color: var(--mc-btn-text);
+    text-shadow: 1px 1px 0 var(--mc-btn-text-shadow),
+        2px 2px 0 var(--mc-btn-text-shadow);
+    background: var(--mc-btn-face);
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    position: relative;
+    transition: background-color 0.05s, color 0.05s;
+    -webkit-user-select: none;
+    user-select: none;
+
+    /* Java Edition button — 3-layer border system:
+       outer dark line → inner top-left bright → inner bottom-right dark */
+    box-shadow:
+        /* outer 2px border */
+        0 0 0 2px #1a1a1a,
+        /* inner top+left bright edge (inside the 2px border) */
+        inset 0 0 0 2px var(--mc-btn-edge-lt),
+        /* inner bottom+right dark edge */
+        inset -2px -3px 0 0 #1a1a1a;
+}
+
+.mc-btn:hover,
+.mc-btn:focus {
+    background: var(--mc-btn-face-hover);
+    color: var(--mc-btn-text-hover);
+    text-shadow: 1px 1px 0 #3f3f00, 2px 2px 0 #3f3f00;
+    box-shadow:
+        0 0 0 2px #1a1a1a,
+        inset 0 0 0 2px #8080d4,
+        inset -2px -3px 0 0 #1a1a1a;
+}
+
+.mc-btn:active {
+    background: #444;
+    transform: translateY(1px);
+    box-shadow:
+        0 0 0 2px #1a1a1a,
+        inset 0 0 0 2px #555,
+        inset -2px -2px 0 0 #1a1a1a;
+}
+
+/* Button size variants */
+.mc-btn--sm {
+    font-size: 1rem;
+    padding: 6px 12px;
+}
+
+.mc-btn--lg {
+    font-size: 1.6rem;
+    padding: 14px 20px;
+}
+
+.mc-btn--half {
+    width: 48%;
+    display: inline-block;
+}
+
+.mc-btn--icon-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* ================================================================
+   JAVA EDITION PANEL / CONTAINER
+   The semi-transparent dark panel used in GUIs
+   ================================================================ */
+.mc-panel {
+    background: var(--mc-panel-bg);
+    /* Exact Java Edition GUI border structure */
+    box-shadow:
+        0 0 0 2px var(--mc-panel-outer),
+        inset 0 0 0 2px var(--mc-panel-lt),
+        inset -2px -2px 0 2px var(--mc-panel-dk);
+    padding: 16px;
+}
+
+/* ================================================================
+   DIRT TEXTURE — CSS recreation of Minecraft dirt block
+   Used as background in inventory / chat panels
+   ================================================================ */
+.mc-dirt-bg {
+    background-color: var(--mc-dirt);
+    background-image:
+        /* noise pattern to simulate dirt texture */
+        repeating-linear-gradient(45deg,
+            rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 2px,
+            transparent 2px, transparent 8px),
+        repeating-linear-gradient(135deg,
+            rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 2px,
+            transparent 2px, transparent 10px);
+}
+
+/* ================================================================
+   INVENTORY SLOT
+   ================================================================ */
+.mc-slot {
+    width: 36px;
+    height: 36px;
+    background: var(--mc-inv-slot);
+    box-shadow:
+        inset 2px 2px 0 0 var(--mc-inv-border-dk),
+        inset -2px -2px 0 0 var(--mc-inv-border-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--mc-text-white);
+}
+
+/* ================================================================
+   TEXT HELPERS — Java Edition colour codes as CSS classes
+   ================================================================ */
+.mc-text-white {
+    color: var(--mc-f);
+    text-shadow: 1px 1px 0 var(--mc-8);
+}
+
+.mc-text-grey {
+    color: var(--mc-7);
+    text-shadow: 1px 1px 0 #222;
+}
+
+.mc-text-yellow {
+    color: var(--mc-e);
+    text-shadow: 1px 1px 0 #3f3f00;
+}
+
+.mc-text-green {
+    color: var(--mc-a);
+    text-shadow: 1px 1px 0 #003300;
+}
+
+.mc-text-red {
+    color: var(--mc-c);
+    text-shadow: 1px 1px 0 #440000;
+}
+
+.mc-text-aqua {
+    color: var(--mc-b);
+    text-shadow: 1px 1px 0 #003333;
+}
+
+.mc-text-gold {
+    color: var(--mc-6);
+    text-shadow: 1px 1px 0 #3f2900;
+}
+
+.mc-text-purple {
+    color: var(--mc-d);
+    text-shadow: 1px 1px 0 #440044;
+}
+
+/* ================================================================
+   SPLASH TEXT — The yellow rotating tip on Java Edition title
+   ================================================================ */
+.mc-splash {
+    font-family: var(--mc-font-ui);
+    font-size: 1.35rem;
+    color: var(--mc-splash);
+    text-shadow: 2px 2px 0 #3f3f00;
+    font-style: italic;
+    transform-origin: center;
+    display: inline-block;
+    animation: splashWobble 0.9s ease-in-out infinite alternate;
+    letter-spacing: 0.5px;
+}
+
+@keyframes splashWobble {
+    from {
+        transform: rotate(-6deg) scale(0.96);
+    }
+
+    to {
+        transform: rotate(-4deg) scale(1.04);
+    }
+}
+
+/* ================================================================
+   TOOLTIP — Java Edition item tooltip
+   ================================================================ */
+.mc-tooltip {
+    background: rgba(16, 0, 16, 0.94);
+    border: 1px solid #280028;
+    box-shadow:
+        0 0 0 1px #140014,
+        inset 0 1px 0 0 #5000aa,
+        0 2px 6px 0 rgba(80, 0, 160, 0.4);
+    padding: 6px 10px;
+    font-family: var(--mc-font-ui);
+    font-size: 1rem;
+    color: var(--mc-f);
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* ================================================================
+   PROGRESS BAR — HP / XP / Loading bar
+   ================================================================ */
+.mc-progress {
+    width: 100%;
+    height: 5px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.mc-progress__fill {
+    height: 100%;
+    background: var(--mc-emerald);
+    transition: width 0.1s ease-out;
+}
+
+/* XP bar style (yellow-green) */
+.mc-progress--xp .mc-progress__fill {
+    background: #80ff20;
+    box-shadow: 0 0 4px #40a010;
+}
+
+/* Loading bar (Java Edition main green) */
+.mc-progress--load {
+    height: 20px;
+    background: #1a1a1a;
+    box-shadow: 0 0 0 2px #1a1a1a, inset 0 0 0 2px #444;
+}
+
+.mc-progress--load .mc-progress__fill {
+    background: linear-gradient(180deg, #80c020 0%, #57861e 60%, #3d6016 100%);
+    box-shadow: inset 0 2px 0 0 rgba(255, 255, 255, 0.25);
+}
+
+/* ================================================================
+   HEADING STYLES
+   ================================================================ */
+.mc-h1 {
+    font-family: var(--mc-font-logo);
+    font-size: clamp(28px, 7vw, 72px);
+    line-height: 1.2;
+    color: #fff;
+    text-shadow:
+        3px 3px 0 #3f3f3f,
+        5px 5px 0 rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.mc-h2 {
+    font-family: var(--mc-font-logo);
+    font-size: clamp(16px, 4vw, 36px);
+    color: #fff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    letter-spacing: 1px;
+}
+
+.mc-h3 {
+    font-family: var(--mc-font-ui);
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--mc-f);
+    text-shadow: 1px 1px 0 var(--mc-8);
+    letter-spacing: 2px;
+}
+
+.mc-label {
+    font-family: var(--mc-font-ui);
+    font-size: 1.1rem;
+    color: var(--mc-7);
+    text-shadow: 1px 1px 0 #000;
+    letter-spacing: 1px;
+}
+
+/* ================================================================
+   SECTION DIVIDER — like Java Edition "Done" separator line
+   ================================================================ */
+.mc-divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #555, transparent);
+    margin: 16px 0;
+}
+
+/* ================================================================
+   TAG / BADGE — Achievement / Item Tag
+   ================================================================ */
+.mc-badge {
+    display: inline-block;
+    font-family: var(--mc-font-ui);
+    font-size: 0.95rem;
+    padding: 3px 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #555;
+    box-shadow: inset 0 0 0 1px #3f3f3f;
+    color: var(--mc-e);
+    text-shadow: 1px 1px 0 #3f3f00;
+    letter-spacing: 1px;
+}
+
+.mc-badge--green {
+    border-color: var(--mc-2);
+    color: var(--mc-a);
+    text-shadow: 1px 1px 0 #003300;
+}
+
+.mc-badge--red {
+    border-color: var(--mc-4);
+    color: var(--mc-c);
+    text-shadow: 1px 1px 0 #440000;
+}
+
+.mc-badge--diamond {
+    border-color: var(--mc-diamond);
+    color: var(--mc-b);
+    text-shadow: 1px 1px 0 #003333;
+}
