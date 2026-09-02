@@ -82,12 +82,12 @@ export default function Portfolio({ pendingSection }) {
 
                 {/* ── Player Book — left side ─────────────────────── */}
                 <div className="hero__book">
-                    <img className="hero__book-bg" src="${import.meta.env.BASE_URL}book-bg.png" alt="book" />
-                    <img className="hero__book-photo" src="${import.meta.env.BASE_URL}karan-photo.jpg" alt="Karan Kumar" />
+                    <img className="hero__book-bg" src={`${import.meta.env.BASE_URL}book-bg.png`} alt="book" />
+                    <img className="hero__book-photo" src={`${import.meta.env.BASE_URL}karan-photo.jpg`} alt="Karan Kumar" />
                 </div>
 
                 {/* ── Photo visible on mobile (book is hidden) ── */}
-                <img className="hero__photo-mobile" src="${import.meta.env.BASE_URL}karan-photo.jpg" alt="Karan Kumar" />
+                <img className="hero__photo-mobile" src={`${import.meta.env.BASE_URL}karan-photo.jpg`} alt="Karan Kumar" />
 
                 <div className="hero__badge">⛏ GAME DEV PORTFOLIO ⛏</div>
 
