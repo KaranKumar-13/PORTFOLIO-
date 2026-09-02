@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import './Portfolio.css';
 import {
     PERSONAL, SKILLS, PROJECTS, EDUCATION,
@@ -23,6 +23,8 @@ const DECO = [
 ];
 
 export default function Portfolio({ pendingSection }) {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     const sectionsRef = {
         about: useRef(null),
         skills: useRef(null),
@@ -31,8 +33,10 @@ export default function Portfolio({ pendingSection }) {
         contact: useRef(null),
     };
 
-    const scrollTo = key =>
+    const scrollTo = key => {
         sectionsRef[key]?.current?.scrollIntoView({ behavior: 'smooth' });
+        setMenuOpen(false); // close nav on link click
+    };
 
     // Auto-scroll to the section chosen on the loading screen
     useEffect(() => {
@@ -49,7 +53,17 @@ export default function Portfolio({ pendingSection }) {
             {/* ══ NAVBAR ════════════════════════════════════════════ */}
             <nav className="navbar">
                 <span className="navbar__logo">KARAN KUMAR ● PORTFOLIO</span>
-                <ul className="navbar__links">
+
+                {/* Hamburger toggle — only visible on mobile */}
+                <button
+                    className={`navbar__hamburger${menuOpen ? ' navbar__hamburger--open' : ''}`}
+                    aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                    onClick={() => setMenuOpen(o => !o)}
+                >
+                    <span /><span /><span />
+                </button>
+
+                <ul className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`}>
                     {[
                         ['About', 'about'],
                         ['Skills', 'skills'],
